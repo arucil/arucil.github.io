@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Plodsoft&#39;s Blog</title>
+  <icon>https://arucil.github.io/icon.png</icon>
+  <subtitle>Programming Language Enthusiast</subtitle>
+  <link href="https://arucil.github.io/atom.xml" rel="self"/>
+  
+  <link href="https://arucil.github.io/"/>
+  <updated>2020-12-27T03:43:29.230Z</updated>
+  <id>https://arucil.github.io/</id>
+  
+  <author>
+    <name>Plodsoft</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Memoization in Haskell</title>
+    <link href="https://arucil.github.io/2018/memoization-in-haskell/"/>
+    <id>https://arucil.github.io/2018/memoization-in-haskell/</id>
+    <published>2018-08-22T16:00:00.000Z</published>
+    <updated>2020-12-27T03:43:29.230Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;Haskell 中一种简单的定义 Fibonacci 函数的方式：&lt;/p&gt;
+&lt;pre class=&quot;line-numbers language-haskell&quot; data-language=&quot;haskell&quot;&gt;&lt;code class=&quot;language-haskell&quot;&gt;&lt;span class=&quot;token hvariable&quot;&gt;fib&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;
+&lt;span class=&quot;token hvariable&quot;&gt;fib&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;
+&lt;span class=&quot;token hvariable&quot;&gt;fib&lt;/span&gt; &lt;span class=&quot;token hvariable&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token hvariable&quot;&gt;fib&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token hvariable&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;token hvariable&quot;&gt;fib&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token hvariable&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span aria-hidden=&quot;true&quot; class=&quot;line-numbers-rows&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;看起来很直观，可以和数学上的 Fibonacci 函数定义一一对应。但是每次递归时会调用 &lt;code&gt;fib&lt;/code&gt; 函数两次，时间复杂度是指数级的，效率惨不忍睹。  &lt;/p&gt;
+&lt;p&gt;上面的 &lt;code&gt;fib&lt;/code&gt; 函数进行了大量的重复运算，我们可以使用 memoization，把计算结果保存起来，避免重复计算。  &lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="Haskell" scheme="https://arucil.github.io/tags/Haskell/"/>
+    
+    <category term="Memoization" scheme="https://arucil.github.io/tags/Memoization/"/>
+    
+    <category term="Lazy-evaluation" scheme="https://arucil.github.io/tags/Lazy-evaluation/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>CPS Transformer的实现</title>
+    <link href="https://arucil.github.io/2018/cps-transformer-implementation/"/>
+    <id>https://arucil.github.io/2018/cps-transformer-implementation/</id>
+    <published>2018-04-02T16:00:00.000Z</published>
+    <updated>2020-12-27T03:52:40.143Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;之前在&lt;a href=&quot;http://lisperator.net/pltut/&quot;&gt;How to implement a programming language in JavaScript&lt;/a&gt;这篇教程中看到了CPS transformer的js实现，决定复习一下CPS变换，于是写了一个CPS transformer。&lt;br&gt;本文的实现使用了R. Kent Dybvig编写的&lt;a href=&quot;https://www.cs.indiana.edu/chezscheme/match/&quot;&gt;Chez Scheme的pattern matching库&lt;/a&gt;，具体使用方法可以查看&lt;a href=&quot;https://www.cs.indiana.edu/chezscheme/match/&quot;&gt;这个链接&lt;/a&gt;。  &lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="Scheme" scheme="https://arucil.github.io/tags/Scheme/"/>
+    
+    <category term="Continuation" scheme="https://arucil.github.io/tags/Continuation/"/>
+    
+    <category term="Continuation-Passing Style" scheme="https://arucil.github.io/tags/Continuation-Passing-Style/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>dynamic-wind的实现</title>
+    <link href="https://arucil.github.io/2017/dynamic-wind-implementation/"/>
+    <id>https://arucil.github.io/2017/dynamic-wind-implementation/</id>
+    <published>2017-12-19T16:00:00.000Z</published>
+    <updated>2020-12-27T03:44:50.207Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;&lt;em&gt;《The Scheme Programming Language, 4th Edition》&lt;/em&gt;中给出了&lt;code&gt;dynamic-wind&lt;/code&gt;函数的&lt;a href=&quot;https://www.scheme.com/tspl4/control.html#./control:h6&quot;&gt;一种实现&lt;/a&gt;，可以给不提供底层&lt;code&gt;dynamic-wind&lt;/code&gt;支持的Scheme实现加入这个功能：  &lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="Scheme" scheme="https://arucil.github.io/tags/Scheme/"/>
+    
+    <category term="Continuation" scheme="https://arucil.github.io/tags/Continuation/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Implementing R5RS&#39;s Macro System: Pattern Language</title>
+    <link href="https://arucil.github.io/2017/r5rs-macro-pattern-language/"/>
+    <id>https://arucil.github.io/2017/r5rs-macro-pattern-language/</id>
+    <published>2017-10-09T16:00:00.000Z</published>
+    <updated>2020-12-27T03:44:42.107Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;The pattern language, used in Scheme&amp;#39;s macro transformer specifications, is a convenient tool for writing macros. It makes Scheme users&amp;#39; lives easier, while implementing the pattern language is more than a trivial task. In this post I will demonstrate how to implement the pattern language, based on the formal semantics presented in [MBE].  &lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="Scheme" scheme="https://arucil.github.io/tags/Scheme/"/>
+    
+    <category term="Macro" scheme="https://arucil.github.io/tags/Macro/"/>
+    
+  </entry>
+  
+</feed>
