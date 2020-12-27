@@ -58,6 +58,20 @@ prismjs:
   preprocess: true
   line_number: true
   tab_replace: '    '
+  
+feed:
+  enable: true
+  type: atom
+  path: atom.xml
+  limit: 20
+  hub:
+  content:
+  content_limit: 140
+  content_limit_delim: ' '
+  order_by: -date
+  icon: icon.png
+  autodiscovery: true
+  template:
 
 # Home page setting
 # path: Root path for your blogs index page. (default = '')
