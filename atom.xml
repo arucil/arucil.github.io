@@ -57,9 +57,9 @@
     
     <category term="Scheme" scheme="https://arucil.github.io/tags/Scheme/"/>
     
-    <category term="Continuation" scheme="https://arucil.github.io/tags/Continuation/"/>
-    
     <category term="Continuation-Passing Style" scheme="https://arucil.github.io/tags/Continuation-Passing-Style/"/>
+    
+    <category term="Continuation" scheme="https://arucil.github.io/tags/Continuation/"/>
     
   </entry>
   
