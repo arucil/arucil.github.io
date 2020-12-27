@@ -107,7 +107,7 @@ theme: next
 deploy:
   type: git
   repository: git@github.com:arucil/arucil.github.io.git
-  branch: master
+  branch: gh-pages
   
 marked:
   smartypants: false
