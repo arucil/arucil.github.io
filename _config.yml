@@ -112,7 +112,8 @@ exclude:
 ignore:
 
 # Extensions
-plugins: hexo-generate-feed
+Plugins:
+- hexo-generate-feed
 ## Themes: https://hexo.io/themes/
 theme: next
 
