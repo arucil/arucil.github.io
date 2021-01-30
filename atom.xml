@@ -6,7 +6,7 @@
   <link href="https://arucil.github.io/atom.xml" rel="self"/>
   
   <link href="https://arucil.github.io/"/>
-  <updated>2021-01-30T14:21:18.318Z</updated>
+  <updated>2021-01-30T14:25:14.740Z</updated>
   <id>https://arucil.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://arucil.github.io/2018/memoization-in-haskell/"/>
     <id>https://arucil.github.io/2018/memoization-in-haskell/</id>
     <published>2018-08-23T00:00:00.000Z</published>
-    <updated>2021-01-30T14:21:18.318Z</updated>
+    <updated>2021-01-30T14:25:14.740Z</updated>
     
     
     <summary type="html">&lt;p&gt;Haskell 中一种简单的定义 Fibonacci 函数的方式：&lt;/p&gt;
@@ -47,7 +47,7 @@
     <link href="https://arucil.github.io/2018/cps-transformer-implementation/"/>
     <id>https://arucil.github.io/2018/cps-transformer-implementation/</id>
     <published>2018-04-03T00:00:00.000Z</published>
-    <updated>2021-01-30T14:21:18.318Z</updated>
+    <updated>2021-01-30T14:25:14.740Z</updated>
     
     
     <summary type="html">&lt;p&gt;之前在&lt;a href=&quot;http://lisperator.net/pltut/&quot;&gt;How to implement a programming language in JavaScript&lt;/a&gt;这篇教程中看到了CPS transformer的js实现，决定复习一下CPS变换，于是写了一个CPS transformer。&lt;br&gt;本文的实现使用了R. Kent Dybvig编写的&lt;a href=&quot;https://www.cs.indiana.edu/chezscheme/match/&quot;&gt;Chez Scheme的pattern matching库&lt;/a&gt;，具体使用方法可以查看&lt;a href=&quot;https://www.cs.indiana.edu/chezscheme/match/&quot;&gt;这个链接&lt;/a&gt;。  &lt;/p&gt;</summary>
@@ -68,7 +68,7 @@
     <link href="https://arucil.github.io/2017/dynamic-wind-implementation/"/>
     <id>https://arucil.github.io/2017/dynamic-wind-implementation/</id>
     <published>2017-12-20T00:00:00.000Z</published>
-    <updated>2021-01-30T14:21:18.318Z</updated>
+    <updated>2021-01-30T14:25:14.740Z</updated>
     
     
     <summary type="html">&lt;p&gt;&lt;em&gt;《The Scheme Programming Language, 4th Edition》&lt;/em&gt;中给出了&lt;code&gt;dynamic-wind&lt;/code&gt;函数的&lt;a href=&quot;https://www.scheme.com/tspl4/control.html#./control:h6&quot;&gt;一种实现&lt;/a&gt;，可以给不提供底层&lt;code&gt;dynamic-wind&lt;/code&gt;支持的Scheme实现加入这个功能：  &lt;/p&gt;</summary>
@@ -87,7 +87,7 @@
     <link href="https://arucil.github.io/2017/r5rs-macro-pattern-language/"/>
     <id>https://arucil.github.io/2017/r5rs-macro-pattern-language/</id>
     <published>2017-10-10T00:00:00.000Z</published>
-    <updated>2021-01-30T14:21:18.318Z</updated>
+    <updated>2021-01-30T14:25:14.740Z</updated>
     
     
     <summary type="html">&lt;p&gt;The pattern language, used in Scheme&amp;#39;s macro transformer specifications, is a convenient tool for writing macros. It makes Scheme users&amp;#39; lives easier, while implementing the pattern language is more than a trivial task. In this post I will demonstrate how to implement the pattern language, based on the formal semantics presented in [MBE].  &lt;/p&gt;</summary>
