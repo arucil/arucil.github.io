@@ -12,3 +12,8 @@ comments: false
 ### 二打一棋
 - [Play Online (WebAssembly Version)](/games/TwoKillOne/game.html)
 - [Source Code](https://github.com/arucil/TwoKillOne)
+
+### HashLife
+
+- [Run Online](/games/HashLife/index.html)
+- [Source Code](https://github.com/arucil/hashlife)

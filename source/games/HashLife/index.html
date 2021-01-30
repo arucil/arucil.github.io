@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>HashLife</title>
+    <style>
+      html, body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+      }
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+      #universe {
+        width: 800px;
+        height: 600px;
+        border: solid 1px lightgray;
+        image-rendering: pixelated;
+      }
+      #zoom-input {
+        width: 320px;
+      }
+      .control-bar {
+        margin-bottom: 20px;
+      }
+      .action {
+        margin: 15px 0 15px 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <style>#forkongithub a{background:#aaa;color:#fff;text-decoration:none;font-family:arial,sans-serif;text-align:center;font-weight:bold;padding:5px 40px;font-size:1rem;line-height:2rem;position:relative;transition:0.5s;}#forkongithub a:hover{background:hsl(20,90%,75%);color:#fff;}#forkongithub a::before,#forkongithub a::after{content:"";width:100%;display:block;position:absolute;top:1px;left:0;height:1px;background:#fff;}#forkongithub a::after{bottom:1px;top:auto;}@media screen and (min-width:800px){#forkongithub{position:absolute;display:block;top:0;right:0;width:200px;overflow:hidden;height:200px;z-index:9999;}#forkongithub a{width:200px;position:absolute;top:60px;right:-60px;transform:rotate(45deg);-webkit-transform:rotate(45deg);-ms-transform:rotate(45deg);-moz-transform:rotate(45deg);-o-transform:rotate(45deg);box-shadow:3px 3px 5px rgba(100,100,100,0.8);}}</style><span id="forkongithub"><a href="https://github.com/arucil/hashlife">Fork me on GitHub</a></span>
+
+    <div class="control-bar">
+      Pattern:
+      <select id="universe-pattern">
+        <option value="glider">Glider</option>
+        <option value="r">R-pentomino</option>
+        <option value="breeder">Breeder</option>
+      </select>
+      &nbsp;&nbsp;
+      Zoom:
+      <input id="zoom-input" type="range" min=-40 max=40 step=1 list="zoom-list"/>
+      <datalist id="zoom-list">
+        <option>-40</option>
+        <option>-30</option>
+        <option>-20</option>
+        <option>-10</option>
+        <option>0</option>
+        <option>10</option>
+        <option>20</option>
+        <option>30</option>
+        <option>40</option>
+    </datalist>
+      <span id="zoom-label"></span>
+      <br/>
+      Step: <input id="step-input" type="number" min=1 max=16777216 step=1/>
+      <button id="reset" class="action">Reset</button>
+      <button id="evolve" class="action">Evolve</button>
+      <button id="reset-coord" class="action">Reset coordinate</button>
+      <br/>
+      Generation: <span id="generation-label"></span>
+    </div>
+    <canvas id="universe"></canvas>
+    <script src="./index.js"></script>
+  </body>
+</html>
