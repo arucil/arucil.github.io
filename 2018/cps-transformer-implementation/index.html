@@ -30,7 +30,7 @@
 <meta property="og:description" content="之前在How to implement a programming language in JavaScript这篇教程中看到了CPS transformer的js实现，决定复习一下CPS变换，于是写了一个CPS transformer。本文的实现使用了R. Kent Dybvig编写的Chez Scheme的pattern matching库，具体使用方法可以查看这个链接。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2018-04-03T00:00:00.000Z">
-<meta property="article:modified_time" content="2021-01-30T14:29:54.242Z">
+<meta property="article:modified_time" content="2021-03-03T08:58:47.574Z">
 <meta property="article:author" content="Plodsoft">
 <meta property="article:tag" content="Scheme">
 <meta property="article:tag" content="Continuation">
@@ -278,7 +278,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-01-30 14:29:54" itemprop="dateModified" datetime="2021-01-30T14:29:54+00:00">2021-01-30</time>
+        <time title="Modified: 2021-03-03 08:58:47" itemprop="dateModified" datetime="2021-03-03T08:58:47+00:00">2021-03-03</time>
       </span>
 
   
@@ -322,7 +322,7 @@
 <pre class="line-numbers language-scheme" data-language="scheme"><code class="language-scheme">[<span class="token punctuation">(</span><span class="token keyword">if</span> ,test ,conseq ,alt<span class="token punctuation">)</span>
  <span class="token punctuation">(</span><span class="token function">cps</span> test
       <span class="token punctuation">(</span><span class="token keyword">lambda</span> <span class="token punctuation">(</span><span class="token lambda-parameter">v</span><span class="token punctuation">)</span>
-        `<span class="token punctuation">(</span><span class="token keyword">if</span> ,v
+        `<span class="token punctuation">(</span>if ,v
              ,<span class="token punctuation">(</span><span class="token function">cps</span> conseq k<span class="token punctuation">)</span>
              ,<span class="token punctuation">(</span><span class="token function">cps</span> alt k<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>这里的conseq和alt两个if分支都用到了k，但没有处理重复的continuation的问题，因此会造成以下的代码膨胀问题：  </p>
@@ -336,13 +336,13 @@
 <pre class="line-numbers language-scheme" data-language="scheme"><code class="language-scheme">[<span class="token punctuation">(</span><span class="token keyword">set!</span> ,var ,exp1<span class="token punctuation">)</span>
  <span class="token punctuation">(</span><span class="token function">cps</span> exp1
       <span class="token punctuation">(</span><span class="token keyword">lambda</span> <span class="token punctuation">(</span><span class="token lambda-parameter">v</span><span class="token punctuation">)</span>
-        <span class="token punctuation">(</span><span class="token function">k</span> `<span class="token punctuation">(</span><span class="token keyword">set!</span> ,var ,v<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+        <span class="token punctuation">(</span><span class="token function">k</span> `<span class="token punctuation">(</span>set! ,var ,v<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>接下来是内置函数调用的变换。由于内置函数不使用CPS方式进行调用，因此要进行特殊处理。  </p>
 <pre class="line-numbers language-scheme" data-language="scheme"><code class="language-scheme">[<span class="token punctuation">(</span><span class="token function">,rator</span> ,rands ...<span class="token punctuation">)</span>
- <span class="token punctuation">(</span><span class="token keyword">guard</span> <span class="token punctuation">(</span><span class="token builtin">memq</span> rator <span class="token punctuation">'</span><span class="token punctuation">(</span><span class="token builtin">cons</span> car cdr null? + - * / > &lt; = >= &lt;= not<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+ <span class="token punctuation">(</span><span class="token keyword">guard</span> <span class="token punctuation">(</span><span class="token builtin">memq</span> rator <span class="token punctuation">'</span><span class="token punctuation">(</span>cons car cdr null? + - * / > &lt; = >= &lt;= not<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
  <span class="token punctuation">(</span><span class="token function">cps*</span> rands
        <span class="token punctuation">(</span><span class="token keyword">lambda</span> <span class="token punctuation">(</span><span class="token lambda-parameter">args</span><span class="token punctuation">)</span>
-         <span class="token punctuation">(</span><span class="token function">k</span> `<span class="token punctuation">(</span><span class="token function">,rator</span> ,@args<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+         <span class="token punctuation">(</span><span class="token function">k</span> `<span class="token punctuation">(</span>,rator ,@args<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>上面的<code>cps*</code>函数对参数列表中每个参数表达式进行CPS变换，把变换的结果收集到一个list中。<code>cps*</code>函数的定义如下：  </p>
 <pre class="line-numbers language-scheme" data-language="scheme"><code class="language-scheme"><span class="token punctuation">(</span><span class="token keyword">define</span> <span class="token punctuation">(</span><span class="token function">cps*</span> exp* k<span class="token punctuation">)</span>
   <span class="token punctuation">(</span><span class="token keyword">cond</span>
@@ -365,7 +365,7 @@
    [else
     <span class="token punctuation">(</span><span class="token function">cps</span> <span class="token punctuation">(</span><span class="token builtin">car</span> exp*<span class="token punctuation">)</span>
          <span class="token punctuation">(</span><span class="token keyword">lambda</span> <span class="token punctuation">(</span><span class="token lambda-parameter">v1</span><span class="token punctuation">)</span>
-           `<span class="token punctuation">(</span><span class="token keyword">begin</span>
+           `<span class="token punctuation">(</span>begin
              ,v1
              ,<span class="token punctuation">(</span><span class="token function">cps-body</span> <span class="token punctuation">(</span><span class="token builtin">cdr</span> exp*<span class="token punctuation">)</span>
                         k<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>]<span class="token punctuation">)</span><span class="token punctuation">)</span>]<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
@@ -402,17 +402,17 @@
 <p>对<code>lambda</code>表达式进行变换时，要在参数列表中加上一个额外的continuation参数。</p>
 <pre class="line-numbers language-scheme" data-language="scheme"><code class="language-scheme">[<span class="token punctuation">(</span><span class="token keyword">lambda</span> <span class="token punctuation">(</span><span class="token lambda-parameter">,params ...</span><span class="token punctuation">)</span> ,body1 ,body* ...<span class="token punctuation">)</span>
  <span class="token punctuation">(</span><span class="token keyword">let</span> <span class="token punctuation">(</span><span class="token function">[k1</span> <span class="token punctuation">(</span><span class="token function">gen-sym</span> <span class="token symbol">'k</span><span class="token punctuation">)</span>]<span class="token punctuation">)</span>
-   <span class="token punctuation">(</span><span class="token function">k</span> `<span class="token punctuation">(</span><span class="token keyword">lambda</span> <span class="token punctuation">(</span><span class="token lambda-parameter">,k1 ,@params</span><span class="token punctuation">)</span>
+   <span class="token punctuation">(</span><span class="token function">k</span> `<span class="token punctuation">(</span>lambda <span class="token punctuation">(</span><span class="token function">,k1</span> ,@params<span class="token punctuation">)</span>
          ,<span class="token punctuation">(</span><span class="token function">cps-body</span> <span class="token punctuation">(</span><span class="token builtin">cons</span> body1 body*<span class="token punctuation">)</span>
                     <span class="token punctuation">(</span><span class="token keyword">lambda</span> <span class="token punctuation">(</span><span class="token lambda-parameter">v</span><span class="token punctuation">)</span>
-                      `<span class="token punctuation">(</span><span class="token function">,k1</span> ,v<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+                      `<span class="token punctuation">(</span>,k1 ,v<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>这里使用了自定义的<code>gen-sym</code>函数生成不重复的symbol，避免参数重名。把额外的continuation参数放到第一个参数的位置是为了可以方便地支持不定参数的函数。<br>要注意的是，这里传给<code>cps-body</code>k参数的是<code>(lambda (v) `(,k1 ,v))</code>，这样函数才能正确地把返回值传给<code>k1</code>continuation。例如<code>(lambda (x) x)</code>会变换成<code>(lambda (k.1 x) (k.1 x))</code>。  </p>
 <p>最后是函数调用的变换：  </p>
 <pre class="line-numbers language-scheme" data-language="scheme"><code class="language-scheme">[<span class="token punctuation">(</span><span class="token function">,rator</span> ,rands ...<span class="token punctuation">)</span>
  <span class="token punctuation">(</span><span class="token function">cps*</span> <span class="token punctuation">(</span><span class="token builtin">cons</span> rator rands<span class="token punctuation">)</span>
        <span class="token punctuation">(</span><span class="token keyword">lambda</span> <span class="token punctuation">(</span><span class="token lambda-parameter">args</span><span class="token punctuation">)</span>
          <span class="token punctuation">(</span><span class="token keyword">let</span> <span class="token punctuation">(</span><span class="token function">[k1</span> <span class="token punctuation">(</span><span class="token function">gen-sym</span> <span class="token symbol">'v</span><span class="token punctuation">)</span>]<span class="token punctuation">)</span>
-           `<span class="token punctuation">(</span><span class="token function">,</span><span class="token punctuation">(</span><span class="token builtin">car</span> args<span class="token punctuation">)</span>
+           `<span class="token punctuation">(</span>,<span class="token punctuation">(</span><span class="token builtin">car</span> args<span class="token punctuation">)</span>
              <span class="token punctuation">(</span><span class="token keyword">lambda</span> <span class="token punctuation">(</span><span class="token lambda-parameter">,k1</span><span class="token punctuation">)</span>
                ,<span class="token punctuation">(</span><span class="token function">k</span> k1<span class="token punctuation">)</span><span class="token punctuation">)</span>
                ,@<span class="token punctuation">(</span><span class="token builtin">cdr</span> args<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
@@ -420,7 +420,7 @@
 <p><code>cps</code>函数完成了，要调用<code>cps</code>函数的话，要定义一个<code>id</code>函数，把CPS变换的结果原样返回：  </p>
 <pre class="line-numbers language-scheme" data-language="scheme"><code class="language-scheme"><span class="token punctuation">(</span><span class="token keyword">define</span> <span class="token punctuation">(</span><span class="token function">id</span> x<span class="token punctuation">)</span> x<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>测试结果：</p>
-<pre class="line-numbers language-scheme" data-language="scheme"><code class="language-scheme">> <span class="token punctuation">(</span><span class="token function">cps</span> <span class="token punctuation">'</span><span class="token punctuation">(</span><span class="token keyword">begin</span>
+<pre class="line-numbers language-scheme" data-language="scheme"><code class="language-scheme">> <span class="token punctuation">(</span><span class="token function">cps</span> <span class="token punctuation">'</span><span class="token punctuation">(</span>begin
           <span class="token punctuation">(</span><span class="token keyword">set!</span> a <span class="token punctuation">(</span><span class="token function">foo</span> <span class="token number">7</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
           <span class="token punctuation">(</span><span class="token keyword">set!</span> b <span class="token punctuation">(</span><span class="token builtin">cons</span> <span class="token number">1</span> <span class="token punctuation">(</span><span class="token function">bar</span> <span class="token number">3</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
        id<span class="token punctuation">)</span>

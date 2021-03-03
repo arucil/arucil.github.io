@@ -2,18 +2,18 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://arucil.github.io/2017/dynamic-wind-implementation/</loc>
-    <lastmod>2021-01-30</lastmod>
+    <lastmod>2021-03-03</lastmod>
   </url>
   <url>
     <loc>https://arucil.github.io/2017/r5rs-macro-pattern-language/</loc>
-    <lastmod>2021-01-30</lastmod>
+    <lastmod>2021-03-03</lastmod>
   </url>
   <url>
     <loc>https://arucil.github.io/2018/cps-transformer-implementation/</loc>
-    <lastmod>2021-01-30</lastmod>
+    <lastmod>2021-03-03</lastmod>
   </url>
   <url>
     <loc>https://arucil.github.io/2018/memoization-in-haskell/</loc>
-    <lastmod>2021-01-30</lastmod>
+    <lastmod>2021-03-03</lastmod>
   </url>
 </urlset> 
